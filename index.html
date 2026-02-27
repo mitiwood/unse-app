@@ -246,8 +246,77 @@ select.input-field option { background:#1a1a2e; }
 .info-box-title { font-size:.72rem; color:var(--p3); font-weight:700; letter-spacing:.1em; margin-bottom:.5rem; }
 .info-box-text { font-size:.8rem; color:var(--mu); line-height:1.7; }
 
+/* ── 4-TAB NAV ─── */
+.bottom-nav { grid-template-columns: repeat(4,1fr); }
+
+/* ── PSYCH TEST ─── */
+.psych-card {
+  background:var(--s1); border:1px solid var(--bd); border-radius:20px;
+  padding:1.3rem; cursor:pointer; transition:all .2s; position:relative; overflow:hidden;
+}
+.psych-card:active { transform:scale(.98); }
+.psych-card-accent { position:absolute; top:0; left:0; right:0; height:3px; border-radius:20px 20px 0 0; }
+.psych-card-emoji { font-size:2rem; margin-bottom:.6rem; }
+.psych-card-title { font-family:'Black Han Sans',sans-serif; font-size:1.1rem; margin-bottom:.3rem; }
+.psych-card-desc { font-size:.78rem; color:var(--mu); line-height:1.6; margin-bottom:.8rem; }
+.psych-card-meta { display:flex; gap:.5rem; }
+.psych-meta-chip { font-size:.65rem; padding:.2rem .6rem; border-radius:100px; background:var(--s2); color:var(--mu); border:1px solid var(--bd); }
+
+.quiz-q-num { font-family:'Space Mono',monospace; font-size:.65rem; color:var(--p3); letter-spacing:.15em; margin-bottom:.6rem; }
+.quiz-q-text { font-family:'Black Han Sans',sans-serif; font-size:1.25rem; line-height:1.4; margin-bottom:1.5rem; }
+.quiz-options { display:flex; flex-direction:column; gap:.65rem; }
+.quiz-option {
+  background:var(--s1); border:1.5px solid var(--bd); border-radius:14px;
+  padding:1rem 1.1rem; cursor:pointer; transition:all .2s; text-align:left;
+  font-size:.9rem; color:var(--tx); font-family:'Noto Sans KR',sans-serif; line-height:1.5;
+}
+.quiz-option:active { transform:scale(.98); }
+.quiz-option.selected { background:rgba(56,189,248,.1); border-color:var(--p3); color:var(--tx); }
+.quiz-option.correct { background:rgba(52,211,153,.12); border-color:var(--p4); }
+.quiz-option.wrong { background:rgba(244,114,182,.08); border-color:var(--p2); opacity:.6; }
+
+.psych-result-card {
+  background:linear-gradient(135deg,rgba(167,139,250,.1),rgba(56,189,248,.08));
+  border:1px solid rgba(167,139,250,.3); border-radius:20px; padding:1.8rem; text-align:center; margin-bottom:1rem;
+}
+.psych-result-emoji { font-size:3.5rem; margin-bottom:.8rem; }
+.psych-result-type { font-family:'Black Han Sans',sans-serif; font-size:1.6rem; margin-bottom:.4rem; }
+.psych-result-sub { font-size:.82rem; color:var(--p1); margin-bottom:1rem; }
+.psych-result-desc { font-size:.9rem; color:rgba(241,240,255,.8); line-height:1.9; font-weight:300; }
+
+/* ── MZ SLANG ─── */
+.slang-cat-btn {
+  background:var(--s1); border:1px solid var(--bd); border-radius:100px;
+  color:var(--mu); font-size:.75rem; padding:.35rem .85rem; cursor:pointer; white-space:nowrap;
+  font-family:'Noto Sans KR',sans-serif; transition:all .2s; flex-shrink:0;
+}
+.slang-cat-btn.active { background:rgba(244,114,182,.15); border-color:var(--p2); color:var(--p2); }
+
+.slang-item {
+  background:var(--s1); border:1px solid var(--bd); border-radius:16px;
+  padding:1.1rem 1.2rem; cursor:pointer; transition:all .2s;
+}
+.slang-item:active { transform:scale(.99); }
+.slang-item-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:.4rem; }
+.slang-word { font-family:'Black Han Sans',sans-serif; font-size:1.1rem; }
+.slang-read { font-size:.7rem; color:var(--mu); }
+.slang-cat-badge { font-size:.65rem; padding:.2rem .55rem; border-radius:100px; background:var(--s2); border:1px solid var(--bd); color:var(--mu); }
+.slang-desc { font-size:.85rem; color:rgba(241,240,255,.75); line-height:1.7; margin-bottom:.5rem; }
+.slang-ex { font-size:.78rem; color:var(--mu); font-style:italic; background:rgba(255,255,255,.03); border-radius:8px; padding:.4rem .6rem; }
+.slang-expand { display:none; margin-top:.6rem; }
+.slang-item.open .slang-expand { display:block; animation:fadeUp .3s ease; }
+.slang-item.open { border-color:rgba(244,114,182,.3); background:rgba(244,114,182,.04); }
+
+.slang-quiz-banner {
+  background:linear-gradient(135deg,rgba(167,139,250,.12),rgba(244,114,182,.08));
+  border:1px solid rgba(167,139,250,.25); border-radius:16px; padding:1rem 1.2rem;
+  display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; cursor:pointer;
+}
+.slang-quiz-banner:active { transform:scale(.99); }
+
 @keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
 .a1{animation:fadeUp .5s .1s ease both} .a2{animation:fadeUp .5s .2s ease both} .a3{animation:fadeUp .5s .3s ease both} .a4{animation:fadeUp .5s .4s ease both}
+
 </style>
 </head>
 <body>
@@ -372,8 +441,10 @@ select.input-field option { background:#1a1a2e; }
 
   <!-- Bottom Nav -->
   <div class="bottom-nav">
-    <button class="nav-btn active" onclick="navTo('fortune')"><span class="nav-btn-icon">🔮</span>운세</button>
-    <button class="nav-btn" onclick="navTo('notify')"><span class="nav-btn-icon">🔔</span>알림설정</button>
+    <button class="nav-btn active" id="fnav-fortune" onclick="navTo('fortune')"><span class="nav-btn-icon">🔮</span>운세</button>
+    <button class="nav-btn" id="fnav-psych" onclick="navTo('psych')"><span class="nav-btn-icon">🧩</span>심리테스트</button>
+    <button class="nav-btn" id="fnav-slang" onclick="navTo('slang')"><span class="nav-btn-icon">💬</span>MZ신조어</button>
+    <button class="nav-btn" id="fnav-notify" onclick="navTo('notify')"><span class="nav-btn-icon">🔔</span>알림</button>
   </div>
 </div>
 
@@ -459,8 +530,10 @@ select.input-field option { background:#1a1a2e; }
 
   <!-- Bottom Nav -->
   <div class="bottom-nav">
-    <button class="nav-btn active" id="nav-fortune" onclick="navTo('fortune')"><span class="nav-btn-icon">🔮</span>운세</button>
-    <button class="nav-btn" id="nav-notify" onclick="navTo('notify')"><span class="nav-btn-icon">🔔</span>알림설정</button>
+    <button class="nav-btn active" id="rnav-fortune" onclick="navTo('fortune')"><span class="nav-btn-icon">🔮</span>운세</button>
+    <button class="nav-btn" id="rnav-psych" onclick="navTo('psych')"><span class="nav-btn-icon">🧩</span>심리테스트</button>
+    <button class="nav-btn" id="rnav-slang" onclick="navTo('slang')"><span class="nav-btn-icon">💬</span>MZ신조어</button>
+    <button class="nav-btn" id="rnav-notify" onclick="navTo('notify')"><span class="nav-btn-icon">🔔</span>알림</button>
   </div>
 </div>
 
@@ -569,8 +642,100 @@ select.input-field option { background:#1a1a2e; }
 
   <!-- Bottom Nav -->
   <div class="bottom-nav">
-    <button class="nav-btn" id="nav2-fortune" onclick="navTo('fortune')"><span class="nav-btn-icon">🔮</span>운세</button>
-    <button class="nav-btn active" id="nav2-notify" onclick="navTo('notify')"><span class="nav-btn-icon">🔔</span>알림설정</button>
+    <button class="nav-btn" id="nnav-fortune" onclick="navTo('fortune')"><span class="nav-btn-icon">🔮</span>운세</button>
+    <button class="nav-btn" id="nnav-psych" onclick="navTo('psych')"><span class="nav-btn-icon">🧩</span>심리테스트</button>
+    <button class="nav-btn" id="nnav-slang" onclick="navTo('slang')"><span class="nav-btn-icon">💬</span>MZ신조어</button>
+    <button class="nav-btn active" id="nnav-notify" onclick="navTo('notify')"><span class="nav-btn-icon">🔔</span>알림</button>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN: PSYCH TEST ══════════ -->
+<div class="screen has-nav" id="screen-psych">
+  <div style="padding:2.5rem 1.5rem 1rem;position:sticky;top:0;background:linear-gradient(to bottom,var(--bg) 85%,transparent);z-index:10;">
+    <p style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--p3);text-transform:uppercase;margin-bottom:.4rem">PSYCHOLOGY</p>
+    <h2 style="font-family:'Black Han Sans',sans-serif;font-size:1.8rem;line-height:1.1">심리테스트 🧩</h2>
+  </div>
+
+  <!-- 테스트 목록 화면 -->
+  <div id="psych-list" style="padding:0 1.5rem 1.5rem;display:flex;flex-direction:column;gap:1rem;overflow-y:auto;flex:1;">
+    <p style="font-size:.82rem;color:var(--mu);line-height:1.7">AI가 분석해주는 나만의 심리테스트 ✨<br>결과는 매번 달라질 수 있어요.</p>
+
+    <div id="psych-cards" style="display:flex;flex-direction:column;gap:.75rem;"></div>
+  </div>
+
+  <!-- 테스트 진행 화면 -->
+  <div id="psych-quiz" style="display:none;flex:1;flex-direction:column;overflow:hidden;">
+    <div style="padding:1rem 1.5rem;background:linear-gradient(to bottom,var(--bg),transparent);">
+      <button onclick="exitQuiz()" style="background:none;border:none;color:var(--mu);font-size:.85rem;cursor:pointer;display:flex;align-items:center;gap:.4rem;font-family:'Noto Sans KR',sans-serif;">← 목록으로</button>
+      <div style="margin-top:.8rem;height:4px;background:var(--s2);border-radius:100px;overflow:hidden;">
+        <div id="quizProgress" style="height:100%;background:linear-gradient(90deg,var(--p3),var(--p1));border-radius:100px;transition:width .4s ease;width:0%"></div>
+      </div>
+      <div style="margin-top:.5rem;font-size:.72rem;color:var(--mu);font-family:'Space Mono',monospace" id="quizProgressText">0 / 0</div>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:0 1.5rem 1.5rem;">
+      <div id="quizContent" style="animation:fadeUp .4s ease"></div>
+    </div>
+  </div>
+
+  <!-- 결과 화면 -->
+  <div id="psych-result" style="display:none;flex:1;overflow-y:auto;padding:0 1.5rem 2rem;"></div>
+
+  <div class="bottom-nav">
+    <button class="nav-btn" id="pnav-fortune" onclick="navTo('fortune')"><span class="nav-btn-icon">🔮</span>운세</button>
+    <button class="nav-btn active" id="pnav-psych" onclick="navTo('psych')"><span class="nav-btn-icon">🧩</span>심리테스트</button>
+    <button class="nav-btn" id="pnav-slang" onclick="navTo('slang')"><span class="nav-btn-icon">💬</span>MZ신조어</button>
+    <button class="nav-btn" id="pnav-notify" onclick="navTo('notify')"><span class="nav-btn-icon">🔔</span>알림</button>
+  </div>
+</div>
+
+<!-- ══════════ SCREEN: MZ SLANG ══════════ -->
+<div class="screen has-nav" id="screen-slang">
+  <div style="padding:2.5rem 1.5rem 1rem;">
+    <p style="font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.2em;color:var(--p2);text-transform:uppercase;margin-bottom:.4rem">MZ DICTIONARY</p>
+    <h2 style="font-family:'Black Han Sans',sans-serif;font-size:1.8rem;line-height:1.1">MZ 신조어 사전 💬</h2>
+    <p style="font-size:.82rem;color:var(--mu);margin-top:.4rem;line-height:1.6">MZ세대 필수 신조어를 마스터해요!</p>
+  </div>
+
+  <!-- 검색 + 필터 -->
+  <div style="padding:0 1.5rem .75rem;position:sticky;top:0;background:linear-gradient(to bottom,var(--bg) 90%,transparent);z-index:10;">
+    <div style="position:relative;margin-bottom:.75rem;">
+      <input type="text" id="slangSearch" placeholder="🔍 신조어 검색..." oninput="filterSlang()"
+        style="width:100%;background:var(--s1);border:1.5px solid var(--bd);border-radius:100px;color:var(--tx);padding:.75rem 1rem .75rem 1rem;font-size:.88rem;font-family:'Noto Sans KR',sans-serif;outline:none;transition:border-color .2s;"
+        onfocus="this.style.borderColor='var(--p2)'" onblur="this.style.borderColor='var(--bd)'">
+    </div>
+    <div style="display:flex;gap:.5rem;overflow-x:auto;padding-bottom:.25rem;scrollbar-width:none;" id="slangCats">
+      <button class="slang-cat-btn active" onclick="filterByCategory('all',this)">전체</button>
+      <button class="slang-cat-btn" onclick="filterByCategory('관계',this)">💕 관계</button>
+      <button class="slang-cat-btn" onclick="filterByCategory('감정',this)">😤 감정</button>
+      <button class="slang-cat-btn" onclick="filterByCategory('라이프',this)">✨ 라이프</button>
+      <button class="slang-cat-btn" onclick="filterByCategory('인터넷',this)">🌐 인터넷</button>
+      <button class="slang-cat-btn" onclick="filterByCategory('직장',this)">💼 직장</button>
+    </div>
+  </div>
+
+  <!-- 오늘의 신조어 -->
+  <div style="padding:0 1.5rem;margin-bottom:1rem;">
+    <div id="slangWordOfDay" style="background:linear-gradient(135deg,rgba(244,114,182,.12),rgba(167,139,250,.08));border:1px solid rgba(244,114,182,.3);border-radius:20px;padding:1.5rem;position:relative;overflow:hidden;">
+      <div style="position:absolute;right:-10px;top:-10px;font-size:4rem;opacity:.08">💬</div>
+      <div style="font-size:.65rem;color:var(--p2);font-weight:700;letter-spacing:.15em;text-transform:uppercase;margin-bottom:.5rem">✦ 오늘의 신조어</div>
+      <div style="font-family:'Black Han Sans',sans-serif;font-size:1.6rem;margin-bottom:.4rem" id="wod-word">로딩 중...</div>
+      <div style="font-size:.75rem;color:var(--p2);margin-bottom:.6rem" id="wod-read">[로딩 중]</div>
+      <div style="font-size:.88rem;color:rgba(241,240,255,.8);line-height:1.7;margin-bottom:.8rem" id="wod-desc">-</div>
+      <div style="background:rgba(255,255,255,.04);border-radius:10px;padding:.6rem .8rem;font-size:.82rem;color:var(--mu);font-style:italic" id="wod-ex">-</div>
+    </div>
+  </div>
+
+  <!-- 단어 목록 -->
+  <div style="padding:0 1.5rem 1.5rem;overflow-y:auto;flex:1;">
+    <div id="slangList" style="display:flex;flex-direction:column;gap:.6rem;"></div>
+    <div id="slangEmpty" style="display:none;text-align:center;padding:3rem 0;color:var(--mu);font-size:.88rem;">검색 결과가 없어요 🥲</div>
+  </div>
+
+  <div class="bottom-nav">
+    <button class="nav-btn" id="snav-fortune" onclick="navTo('fortune')"><span class="nav-btn-icon">🔮</span>운세</button>
+    <button class="nav-btn" id="snav-psych" onclick="navTo('psych')"><span class="nav-btn-icon">🧩</span>심리테스트</button>
+    <button class="nav-btn active" id="snav-slang" onclick="navTo('slang')"><span class="nav-btn-icon">💬</span>MZ신조어</button>
+    <button class="nav-btn" id="snav-notify" onclick="navTo('notify')"><span class="nav-btn-icon">🔔</span>알림</button>
   </div>
 </div>
 
@@ -639,18 +804,24 @@ function showScreen(id){
 }
 
 function navTo(tab) {
+  const allNavBtns = document.querySelectorAll('.nav-btn');
+  allNavBtns.forEach(b => b.classList.remove('active'));
+
   if (tab === 'fortune') {
     const target = lastFortune ? 'screen-result' : 'screen-form';
     showScreen(target);
-    // Update all nav buttons
-    document.querySelectorAll('.nav-btn').forEach(b => {
-      b.classList.toggle('active', b.id.includes('fortune'));
-    });
+    document.querySelectorAll('[id$="nav-fortune"],[id*="nav-fortune"],[id$="nav-fortune"],[id*="nav-fortune"]').forEach(b=>b.classList.add('active'));
+  } else if (tab === 'psych') {
+    showScreen('screen-psych');
+    document.querySelectorAll('[id$="nav-psych"],[id*="nav-psych"],[id$="nav-psych"],[id*="nav-psych"]').forEach(b=>b.classList.add('active'));
+    initPsychScreen();
+  } else if (tab === 'slang') {
+    showScreen('screen-slang');
+    document.querySelectorAll('[id$="nav-slang"],[id*="nav-slang"],[id$="nav-slang"],[id*="nav-slang"]').forEach(b=>b.classList.add('active'));
+    initSlangScreen();
   } else if (tab === 'notify') {
     showScreen('screen-notify');
-    document.querySelectorAll('.nav-btn').forEach(b => {
-      b.classList.toggle('active', b.id.includes('notify'));
-    });
+    document.querySelectorAll('[id$="nav-notify"],[id*="nav-notify"],[id$="nav-notify"],[id*="nav-notify"]').forEach(b=>b.classList.add('active'));
     loadNotifLog();
   }
 }
@@ -1123,13 +1294,332 @@ function showToast(msg){
 // ═══════════════════════════════════
 // INIT
 // ═══════════════════════════════════
+
+// ═══════════════════════════════════════════════════════
+// ██████  PSYCHOLOGY TEST ENGINE
+// ═══════════════════════════════════════════════════════
+
+const PSYCH_TESTS = [
+  {
+    id: 'love',
+    emoji: '💘',
+    title: '나의 연애 스타일은?',
+    desc: '10가지 상황으로 알아보는 나의 진짜 연애 유형',
+    tags: ['연애', '5분'],
+    accent: 'linear-gradient(90deg,#f472b6,#a78bfa)',
+    questions: [
+      { q: '💌 좋아하는 사람이 연락이 뜸해졌어요. 나는?', opts: ['먼저 연락한다', '기다린다', '그 사람 SNS를 탐방한다', '쿨하게 신경 안 쓴다'] },
+      { q: '💝 이상형의 조건은?', opts: ['외모가 제일 중요', '성격이 제일 중요', '유머감각', '경제력·안정감'] },
+      { q: '🎂 기념일을 챙기는 스타일은?', opts: ['100일도 다 챙긴다', '생일·크리스마스만', '기념일? 그게 뭐예요', '상대방이 원하면 챙긴다'] },
+      { q: '😤 연인이 화가 났을 때 나는?', opts: ['바로 사과한다', '원인을 분석한다', '같이 화낸다', '시간을 두고 대화한다'] },
+      { q: '📱 연인에게 하루 몇 번 연락하나요?', opts: ['수시로 (10번 이상)', '3~5번 정도', '필요할 때만', '아침·저녁 체크'] },
+    ],
+    results: [
+      { range: [0,1], emoji: '🌊', type: '감성파 연인', sub: '감정에 솔직한 로맨티스트', desc: '감정 표현이 풍부하고 연애에 진심이에요. 상대방을 위해 모든 걸 쏟아붓는 스타일이라 처음엔 매력적이지만 번아웃이 올 수 있어요. 자신을 사랑하는 것도 중요해요 💜' },
+      { range: [2,3], emoji: '🧊', type: '쿨한 독립형', sub: '자유로운 영혼의 연애러', desc: '연애보다 자신의 삶을 중시하는 타입이에요. 집착하지 않고 상대방의 공간을 존중해요. 다만 가끔은 감정 표현을 더 해주면 관계가 깊어질 거예요 ✨' },
+      { range: [4,5], emoji: '🔥', type: '열정 돌진형', sub: '좋으면 바로 GO하는 스타일', desc: '좋으면 바로 표현하는 직진 스타일! 추진력이 넘치지만 상대방의 속도도 맞춰주는 연습이 필요해요. 당신의 열정은 분명 누군가에게 큰 감동이 될 거예요 💕' },
+    ]
+  },
+  {
+    id: 'stress',
+    emoji: '🧘',
+    title: '나의 스트레스 유형 테스트',
+    desc: 'AI가 분석하는 나만의 스트레스 패턴과 해소법',
+    tags: ['심리', '3분', 'AI분석'],
+    accent: 'linear-gradient(90deg,#34d399,#38bdf8)',
+    questions: [
+      { q: '😮‍💨 스트레스를 받으면 가장 먼저 하는 행동은?', opts: ['혼자 방에 틀어박힌다', '친구에게 털어놓는다', '먹는다 🍕', '운동하거나 산책한다'] },
+      { q: '💭 스트레스의 가장 큰 원인은?', opts: ['인간관계', '업무·학업', '돈 걱정', '미래에 대한 불안'] },
+      { q: '😴 잠을 잘 못 자는 편인가요?', opts: ['항상 그렇다', '스트레스 받을 때만', '거의 안 그렇다', '오히려 너무 많이 잔다'] },
+      { q: '🛋️ 완벽한 휴식이란?', opts: ['아무것도 안 하기', '좋아하는 취미 즐기기', '친구들과 놀기', '여행가기'] },
+      { q: '🧩 스트레스 상황에서 나는?', opts: ['그냥 참는다', '감정이 폭발한다', '해결책을 찾는다', '못 본 척 피한다'] },
+    ],
+    results: [
+      { range: [0,1], emoji: '🌋', type: '폭발형 스트레스', sub: '쌓이다 터지는 화산 타입', desc: '속으로 꾹꾹 참다가 한 번에 폭발하는 편이에요. 평소에 감정을 조금씩 표현하는 연습을 해보세요. 일기 쓰기, 러닝, 펀치백이 추천 해소법이에요 🥊' },
+      { range: [2,3], emoji: '🌊', type: '감정 과부하형', sub: '예민한 안테나를 가진 타입', desc: '주변 환경과 감정에 민감하게 반응하는 타입이에요. 혼자만의 시간과 마음의 여유가 필수예요. 명상, 호흡법, 아로마테라피를 추천해요 🕯️' },
+      { range: [4,5], emoji: '🤖', type: '해결사형 스트레스', sub: '이성으로 감정을 누르는 타입', desc: '감정보다 해결에 집중하는 합리적인 타입이에요. 근데 감정을 너무 억누르면 몸이 먼저 신호를 보내요. 가끔은 감정 그대로 느끼는 시간을 가져봐요 💆' },
+    ]
+  },
+  {
+    id: 'work',
+    emoji: '💼',
+    title: '나의 직장 생활 유형은?',
+    desc: '직장에서 나는 어떤 사람? 찐 직장인 심리 테스트',
+    tags: ['직장', '4분'],
+    accent: 'linear-gradient(90deg,#a78bfa,#38bdf8)',
+    questions: [
+      { q: '📋 월요일 아침 출근할 때 내 마음은?', opts: ['벌써 금요일이면 좋겠다', '오늘 할 일이 기대된다', '그냥 무감각하다', '커피 먼저가 급선무'] },
+      { q: '🤝 팀 프로젝트에서 나의 역할은?', opts: ['아이디어 뱅크', '실행력 담당', '분위기 메이커', '꼼꼼한 검토자'] },
+      { q: '😤 억울한 상황이 생겼을 때?', opts: ['바로 말한다', '참고 넘어간다', '나중에 조용히 말한다', '퇴사 상상을 한다'] },
+      { q: '🍱 점심시간 활용법은?', opts: ['동료와 수다 타임', '혼자 맛집 탐방', '짧게 낮잠', '업무 연장 (...)'] },
+      { q: '📈 이상적인 업무 환경은?', opts: ['자유로운 재택·원격', '팀워크 좋은 사무실', '성과로 인정받는 곳', '워라밸 완벽한 곳'] },
+    ],
+    results: [
+      { range: [0,1], emoji: '⚡', type: '불꽃 열정러', sub: '일이 곧 삶인 드라이버 타입', desc: '목표 지향적이고 성과에 집중하는 타입이에요. 빠른 성장을 경험하지만 번아웃에 주의해야 해요. 작은 휴식과 취미 생활로 에너지를 재충전하세요 🔋' },
+      { range: [2,3], emoji: '🌿', type: '워라밸 마스터', sub: '일도 삶도 균형있게 챙기는 타입', desc: '일과 삶의 균형을 잘 맞추는 현명한 타입이에요. 적당한 긴장감을 유지하면 더 효율적으로 일할 수 있어요. 당신의 균형감이 주변에도 좋은 영향을 줘요 ✨' },
+      { range: [4,5], emoji: '🎭', type: '분위기 메이커', sub: '팀의 활력소 소셜 타입', desc: '관계를 중시하고 팀 분위기를 살리는 소중한 존재예요. 대인관계 능력이 뛰어나지만 때로는 자신의 업무에도 집중하는 시간이 필요해요 💪' },
+    ]
+  },
+  {
+    id: 'friend',
+    emoji: '🫂',
+    title: '나는 어떤 친구 유형?',
+    desc: '친구들이 나를 어떻게 볼까? AI 우정 분석기',
+    tags: ['관계', '3분', 'AI분석'],
+    accent: 'linear-gradient(90deg,#f472b6,#34d399)',
+    questions: [
+      { q: '🎉 친구 생일에 나는?', opts: ['서프라이즈 파티 기획', '선물 정성껏 준비', '밥 한 끼 쏜다', '카톡으로 축하 메시지'] },
+      { q: '😢 친구가 힘들어할 때?', opts: ['바로 달려간다', '밤새 통화해준다', '맛있는 거 먹이러 간다', '해결책을 같이 찾는다'] },
+      { q: '🤐 친구가 비밀을 말해줬어요. 나는?', opts: ['죽어도 지킨다', '진짜 친한 친구 한 명에게만', '나도 모르게 말하게 된다 😅', '비밀이야? 다시 한번 확인한다'] },
+      { q: '👥 친구 그룹에서 나의 포지션은?', opts: ['분위기 메이커', '엄마(아빠) 같은 존재', '조용한 관찰자', '갈등 해결사'] },
+      { q: '📱 친구와 연락 주기는?', opts: ['매일 대화', '일주일에 몇 번', '생각날 때만', '거의 안 하지만 만나면 찐친'] },
+    ],
+    results: [
+      { range: [0,1], emoji: '🌟', type: '찐친 메이커', sub: '누구에게나 최고의 친구 타입', desc: '따뜻하고 의리 있어서 주변에 사람이 모이는 타입이에요. 다만 너무 give만 하다가 지치지 않도록 주의하세요. 당신 자신도 소중해요 💜' },
+      { range: [2,3], emoji: '🎯', type: '알잖아 시크형', sub: '적지만 진한 인간관계 타입', desc: '깊고 진한 관계를 선호하는 타입이에요. 넓은 인간관계보다 소수의 진짜 친구가 있죠. 가끔 먼저 연락해보면 더 풍요로운 관계가 될 거예요 ✉️' },
+      { range: [4,5], emoji: '🎪', type: '분위기 퀸/킹', sub: '어디서든 사랑받는 소셜 타입', desc: '어디서든 분위기를 살리고 사람들을 즐겁게 해주는 타입이에요. 표면적인 관계가 많을 수 있으니 가끔은 속 깊은 대화도 시도해보세요 🌈' },
+    ]
+  }
+];
+
+let currentTest = null;
+let quizAnswers = [];
+let quizStep = 0;
+let psychInitDone = false;
+
+function initPsychScreen() {
+  if (psychInitDone) return;
+  psychInitDone = true;
+  const container = document.getElementById('psych-cards');
+  container.innerHTML = PSYCH_TESTS.map(t => `
+    <div class="psych-card" onclick="startQuiz('${t.id}')">
+      <div class="psych-card-accent" style="background:${t.accent}"></div>
+      <div class="psych-card-emoji">${t.emoji}</div>
+      <div class="psych-card-title">${t.title}</div>
+      <div class="psych-card-desc">${t.desc}</div>
+      <div class="psych-card-meta">
+        ${t.tags.map(tag => `<span class="psych-meta-chip">${tag}</span>`).join('')}
+        <span class="psych-meta-chip" style="margin-left:auto;color:var(--p1);border-color:rgba(167,139,250,.3)">시작 →</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function startQuiz(id) {
+  currentTest = PSYCH_TESTS.find(t => t.id === id);
+  if (!currentTest) return;
+  quizAnswers = [];
+  quizStep = 0;
+  document.getElementById('psych-list').style.display = 'none';
+  document.getElementById('psych-quiz').style.display = 'flex';
+  document.getElementById('psych-result').style.display = 'none';
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = currentTest.questions[quizStep];
+  const total = currentTest.questions.length;
+  document.getElementById('quizProgress').style.width = ((quizStep / total) * 100) + '%';
+  document.getElementById('quizProgressText').textContent = `${quizStep} / ${total}`;
+  document.getElementById('quizContent').innerHTML = `
+    <div class="quiz-q-num">Q${quizStep + 1} / ${total}</div>
+    <div class="quiz-q-text">${q.q}</div>
+    <div class="quiz-options">
+      ${q.opts.map((opt, i) => `
+        <button class="quiz-option" onclick="answerQuiz(${i})">${opt}</button>
+      `).join('')}
+    </div>
+  `;
+  document.getElementById('quizContent').style.animation = 'none';
+  requestAnimationFrame(() => { document.getElementById('quizContent').style.animation = 'fadeUp .4s ease'; });
+}
+
+function answerQuiz(idx) {
+  quizAnswers.push(idx);
+  quizStep++;
+  const total = currentTest.questions.length;
+  document.getElementById('quizProgress').style.width = ((quizStep / total) * 100) + '%';
+  document.getElementById('quizProgressText').textContent = `${quizStep} / ${total}`;
+
+  if (quizStep >= total) {
+    showPsychResult();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showPsychResult() {
+  // Simple scoring: average answer index
+  const avg = quizAnswers.reduce((a, b) => a + b, 0) / quizAnswers.length;
+  const results = currentTest.results;
+  let result = results[results.length - 1];
+  for (const r of results) {
+    if (avg <= r.range[1]) { result = r; break; }
+  }
+
+  document.getElementById('psych-quiz').style.display = 'none';
+  const el = document.getElementById('psych-result');
+  el.style.display = 'block';
+  el.innerHTML = `
+    <div style="padding-top:1rem">
+      <div class="psych-result-card">
+        <div class="psych-result-emoji">${result.emoji}</div>
+        <div class="psych-result-type">${result.type}</div>
+        <div class="psych-result-sub">${result.sub}</div>
+        <div class="psych-result-desc">${result.desc}</div>
+      </div>
+
+      <div style="background:var(--s1);border:1px solid var(--bd);border-radius:16px;padding:1.2rem;margin-bottom:1rem;">
+        <div style="font-size:.72rem;color:var(--p1);font-weight:700;letter-spacing:.12em;margin-bottom:.8rem">📊 내 답변 패턴</div>
+        ${currentTest.questions.map((q, i) => `
+          <div style="margin-bottom:.6rem;padding-bottom:.6rem;border-bottom:1px solid var(--bd);font-size:.8rem;">
+            <div style="color:var(--mu);margin-bottom:.2rem">Q${i+1}. ${q.q.replace(/^[^\s]+ /,'')}</div>
+            <div style="color:var(--tx);font-weight:600">→ ${q.opts[quizAnswers[i]]}</div>
+          </div>
+        `).join('')}
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:.6rem;">
+        <button style="width:100%;padding:1rem;border-radius:100px;border:none;background:linear-gradient(135deg,var(--p3),var(--p1));color:#fff;font-family:'Black Han Sans',sans-serif;font-size:1rem;cursor:pointer;" onclick="startQuiz('${currentTest.id}')">🔄 다시 테스트하기</button>
+        <button style="width:100%;padding:1rem;border-radius:100px;border:1px solid var(--bd);background:transparent;color:var(--mu);font-family:'Black Han Sans',sans-serif;font-size:1rem;cursor:pointer;" onclick="sharePsychResult('${result.type}','${result.emoji}')">💬 카카오톡 공유</button>
+        <button style="width:100%;padding:1rem;border-radius:100px;border:1px solid var(--bd);background:transparent;color:var(--mu);font-family:'Black Han Sans',sans-serif;font-size:1rem;cursor:pointer;" onclick="exitQuiz()">← 다른 테스트 보기</button>
+      </div>
+    </div>
+  `;
+}
+
+function exitQuiz() {
+  document.getElementById('psych-list').style.display = 'flex';
+  document.getElementById('psych-quiz').style.display = 'none';
+  document.getElementById('psych-result').style.display = 'none';
+}
+
+function sharePsychResult(type, emoji) {
+  const msg = `${emoji} 나의 심리테스트 결과!\n\n"${type}"\n\nUNSE 앱에서 나도 해봐! ✨`;
+  if (navigator.share) { navigator.share({ title: 'UNSE 심리테스트', text: msg }); }
+  else if (navigator.clipboard) { navigator.clipboard.writeText(msg); showToast('📋 결과가 클립보드에 복사됐어요!'); }
+}
+
+// ═══════════════════════════════════════════════════════
+// ██████  MZ SLANG ENGINE
+// ═══════════════════════════════════════════════════════
+
+const SLANG_DATA = [
+  { w:'갓생', r:'갓-생', cat:'라이프', desc:'God+생(生). 신처럼 완벽하고 부지런하게 사는 삶. 일찍 일어나서 운동하고 공부하는 이상적인 하루를 뜻함.', ex:'나 오늘 새벽 5시에 일어나서 운동하고 책 읽었어. 완전 갓생 살았다~' },
+  { w:'탕진잼', r:'탕-진-잼', cat:'라이프', desc:'탕진(탕진하다)+잼(재미). 돈을 펑펑 써버리는 것 자체에서 오는 재미. 소소한 사치를 즐기는 문화.', ex:'오늘 편의점에서 탕진잼 느꼈어. 신상 다 담았거든.' },
+  { w:'알잖아', r:'알-잖-아', cat:'관계', desc:'상대방이 당연히 알 것이라고 가정하면서 쓰는 말. 설명 없이도 통하는 관계임을 나타냄.', ex:'우리 우정 알잖아? 그러니까 부탁 하나만 들어줘.' },
+  { w:'핵인싸', r:'핵-인-싸', cat:'관계', desc:'핵(매우)+인사이더. 어디서든 인기 많고 친구가 많은 사람. 사교성이 넘치는 사람을 의미함.', ex:'쟤 어딜 가도 핵인싸야. 동창회 첫날부터 모든 사람이랑 친해졌어.' },
+  { w:'아아', r:'아-아', cat:'라이프', desc:'아이스 아메리카노의 줄임말. MZ세대의 필수 음료.', ex:'점심 먹고 아아 한 잔 해야 오후를 버티지.' },
+  { w:'취존', r:'취-존', cat:'관계', desc:'취향 존중의 줄임말. 서로의 취향을 비난하지 않고 존중하자는 의미.', ex:'나는 별로지만 취존이야. 네가 좋아하면 됐어.' },
+  { w:'ㅂㅅ', r:'비-읍', cat:'인터넷', desc:'비속어의 줄임말(바보+아). 인터넷에서 자주 쓰이는 속어. 친한 사이에서 가볍게 쓰기도 함.', ex:'야 ㅂㅅ아 그걸 왜 거기다 두고 와 ㅋㅋ' },
+  { w:'현타', r:'현-타', cat:'감정', desc:'현실 자각 타임의 줄임말. 신나게 놀다가 갑자기 현실을 직면하게 되는 순간의 허무함.', ex:'여행 끝나고 집 오니까 현타 미쳤다. 내일 또 출근이라니.' },
+  { w:'TMI', r:'티-엠-아이', cat:'인터넷', desc:'Too Much Information. 굳이 몰라도 될 과도한 개인 정보를 공유하는 것.', ex:'TMI인데 나 어제 치킨 두 마리 먹었어. 반성 중이야.' },
+  { w:'킹받네', r:'킹-받-네', cat:'감정', desc:'화가 난다는 뜻. 킹(King)+받다(열받다)의 합성어. 강하게 열받는 상황에서 사용.', ex:'진짜 킹받네. 나만 빼고 다 점심 먹으러 갔잖아.' },
+  { w:'존맛탱', r:'존-맛-탱', cat:'라이프', desc:'매우 맛있다는 뜻. 비속어+맛+탱(접미사). 음식이 극도로 맛있을 때 사용하는 표현.', ex:'이 떡볶이 존맛탱이야. 소스가 미쳤어.' },
+  { w:'ㄹㅇ', r:'리-얼', cat:'인터넷', desc:'리얼의 초성. 진짜, 정말이라는 뜻으로 공감하거나 강조할 때 사용.', ex:'ㄹㅇ 요즘 날씨 왜 이래. 미치겠음.' },
+  { w:'뇌절', r:'뇌-절', cat:'감정', desc:'뇌(뇌)+절(절도). 같은 말이나 행동을 반복해서 질릴 정도가 된 상태. 과한 드립이나 개그.', ex:'그 드립 이제 뇌절이야. 세 번째 들었어.' },
+  { w:'스불재', r:'스-불-재', cat:'감정', desc:'스스로 불러온 재앙의 줄임말. 자신이 자초한 힘든 상황을 표현할 때 사용.', ex:'야근 자원했더니 진짜 할 게 쏟아지네. 완전 스불재다.' },
+  { w:'무물', r:'무-물', cat:'인터넷', desc:'무엇이든 물어보세요의 줄임말. SNS에서 팔로워에게 질문을 받을 때 사용.', ex:'인스타 스토리에 무물 올렸더니 질문이 200개야 ㄷㄷ' },
+  { w:'플렉스', r:'플-렉-스', cat:'라이프', desc:'Flex. 자신의 재력이나 물건을 과시하는 행위. 부를 자랑하는 것.', ex:'오늘 명품 가방 질렀어. 완전 플렉스 했다.' },
+  { w:'좋댓구알', r:'좋-댓-구-알', cat:'인터넷', desc:'좋아요·댓글·구독·알림설정의 줄임말. 유튜버들이 자주 요청하는 행동들.', ex:'영상 좋으시면 좋댓구알 부탁드려요~' },
+  { w:'찐이야', r:'찐-이-야', cat:'감정', desc:'진짜, 진심이라는 뜻. 과장 없이 정말로 그렇다는 강한 긍정의 표현.', ex:'이 카페 찐이야. 여기가 찐 감성 카페다.' },
+  { w:'갬성', r:'갬-성', cat:'감정', desc:'감성(感性)의 변형. 감각적이고 감성적인 분위기나 느낌을 표현할 때 사용.', ex:'오늘 노을 갬성 미쳤다. 사진 200장 찍었어.' },
+  { w:'억텐', r:'억-텐', cat:'감정', desc:'억지 텐션의 줄임말. 실제론 기분이 좋지 않은데 억지로 밝게 에너지를 낸 상태.', ex:'오늘 완전 억텐으로 버텼어. 집 오니까 쓰러질 것 같아.' },
+  { w:'N잡러', r:'엔-잡-러', cat:'직장', desc:'N개의 직업+러(사람). 여러 직업을 동시에 가지고 있는 사람. 부업이 많은 사람.', ex:'나 요즘 N잡러야. 본업에 유튜브에 부동산 공부까지.' },
+  { w:'워라밸', r:'워-라-밸', cat:'직장', desc:'Work-Life Balance의 줄임말. 일과 삶의 균형. MZ세대 직장 선택의 핵심 기준.', ex:'연봉보다 워라밸이 중요해. 야근 없는 회사가 최고야.' },
+  { w:'점메추', r:'점-메-추', cat:'라이프', desc:'점심 메뉴 추천의 줄임말. 점심 뭐 먹을지 모를 때 주변에 추천을 요청하는 표현.', ex:'오늘 점메추 제발. 뭐 먹어야 할지 모르겠어.' },
+  { w:'갓파더', r:'갓-파-더', cat:'관계', desc:'Godfather. 어떤 분야에서 최고 권위자이거나 최상위 능력자를 칭하는 표현.', ex:'그 팀장님은 엑셀 갓파더야. 모르는 함수가 없어.' },
+  { w:'혼코노', r:'혼-코-노', cat:'라이프', desc:'혼자 코인노래방의 줄임말. 혼자 코인노래방을 가는 것. 혼자만의 시간을 즐기는 문화.', ex:'오늘 혼코노 다녀왔어. 두 시간 동안 신나게 불렀다 ㅋㅋ' },
+];
+
+let slangInitDone = false;
+let currentCategory = 'all';
+let slangSearchTerm = '';
+
+function initSlangScreen() {
+  if (slangInitDone) return;
+  slangInitDone = true;
+  setWordOfDay();
+  renderSlangList();
+}
+
+function setWordOfDay() {
+  const idx = new Date().getDate() % SLANG_DATA.length;
+  const w = SLANG_DATA[idx];
+  document.getElementById('wod-word').textContent = w.w;
+  document.getElementById('wod-read').textContent = `[${w.r}]`;
+  document.getElementById('wod-desc').textContent = w.desc;
+  document.getElementById('wod-ex').textContent = `"${w.ex}"`;
+}
+
+function renderSlangList() {
+  const search = slangSearchTerm.toLowerCase();
+  const filtered = SLANG_DATA.filter(s => {
+    const matchCat = currentCategory === 'all' || s.cat === currentCategory;
+    const matchSearch = !search || s.w.includes(search) || s.desc.includes(search) || s.ex.includes(search);
+    return matchCat && matchSearch;
+  });
+
+  const list = document.getElementById('slangList');
+  const empty = document.getElementById('slangEmpty');
+
+  if (filtered.length === 0) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+
+  list.innerHTML = filtered.map((s, i) => `
+    <div class="slang-item" id="slang-${i}" onclick="toggleSlang(${i})">
+      <div class="slang-item-top">
+        <div>
+          <span class="slang-word">${s.w}</span>
+          <span class="slang-read" style="margin-left:.5rem">[${s.r}]</span>
+        </div>
+        <span class="slang-cat-badge">${s.cat}</span>
+      </div>
+      <div class="slang-desc">${s.desc.length > 45 ? s.desc.slice(0,45)+'...' : s.desc}</div>
+      <div class="slang-expand">
+        <div class="slang-desc" style="margin-bottom:.5rem">${s.desc}</div>
+        <div class="slang-ex">💬 ${s.ex}</div>
+        <div style="display:flex;gap:.5rem;margin-top:.75rem;">
+          <button onclick="event.stopPropagation();copySlang('${s.w}','${s.desc.replace(/'/g,"\\'")}','${s.ex.replace(/'/g,"\\'")}')" style="flex:1;padding:.5rem;background:rgba(244,114,182,.1);border:1px solid rgba(244,114,182,.25);border-radius:100px;color:var(--p2);font-size:.75rem;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">💬 카톡으로 공유</button>
+          <button onclick="event.stopPropagation();toggleSlang(${i})" style="padding:.5rem .9rem;background:var(--s2);border:1px solid var(--bd);border-radius:100px;color:var(--mu);font-size:.75rem;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">닫기</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleSlang(i) {
+  const el = document.getElementById('slang-' + i);
+  if (!el) return;
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.slang-item').forEach(e => e.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
+
+function filterSlang() {
+  slangSearchTerm = document.getElementById('slangSearch').value;
+  renderSlangList();
+}
+
+function filterByCategory(cat, btn) {
+  currentCategory = cat;
+  document.querySelectorAll('.slang-cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderSlangList();
+}
+
+
 window.addEventListener('DOMContentLoaded',()=>{
-  // Check for saved notification settings
   const saved=JSON.parse(localStorage.getItem('unse_notif')||'null');
   if(saved?.enabled && Notification.permission==='granted'){
     scheduleNextNotification(saved.hour,saved.min);
   }
 });
+
 </script>
 </body>
 </html>
